@@ -1,0 +1,20 @@
+name: Swift
+
+on:
+  push:
+    branches: [ feature/KR ]
+  pull_request:
+    branches: [ feature/KR ]
+
+jobs:
+  test:
+    name: Build and test iOS app
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Force Xcode 13.2.1
+      run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
+    - name: Testing iOS app
+      run: exec ./.github/scripts/test_app.sh
