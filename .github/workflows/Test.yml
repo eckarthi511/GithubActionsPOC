@@ -10,9 +10,9 @@ on:
         - main
         - branch-*
 
-name: Build and test iOS app
 jobs:
   test:
+    name: Build and test iOS app
     runs-on: macos-latest
 
     steps:
