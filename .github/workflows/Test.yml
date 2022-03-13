@@ -18,23 +18,20 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Force Xcode 13.2.1
-      run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
-    - name: Testing iOS app
-      run: exec ./.github/scripts/test_app.sh
-      
-  sonarcloud:
-    name: Sonar cloud scan
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+        
+    - name: Force Xcode 13.2.1
+      run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
+      
+    - name: Testing iOS app
+      run: exec ./.github/scripts/test_app.sh
+      
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      
+    
