@@ -23,8 +23,6 @@ jobs:
     - name: Testing iOS app
       run: exec ./.github/scripts/test_app.sh
       
-
-jobs:
   sonarcloud:
     name: Sonar cloud scan
     runs-on: ubuntu-latest
