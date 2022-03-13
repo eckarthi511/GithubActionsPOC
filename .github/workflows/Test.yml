@@ -2,13 +2,17 @@ name: Swift
 
 on:
   push:
-    branches: [ feature/KR ]
+    branches:
+        - main
+        - branch-*
   pull_request:
-    branches: [ feature/KR ]
+    branches:
+        - main
+        - branch-*
 
+name: Build and test iOS app
 jobs:
   test:
-    name: Build and test iOS app
     runs-on: macos-latest
 
     steps:
@@ -18,3 +22,5 @@ jobs:
       run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
     - name: Testing iOS app
       run: exec ./.github/scripts/test_app.sh
+      
+
