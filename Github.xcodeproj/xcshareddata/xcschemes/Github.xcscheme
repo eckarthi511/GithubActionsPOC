@@ -37,13 +37,6 @@
             BlueprintName = "GithubTests"
             ReferencedContainer = "container:Github.xcodeproj">
          </BuildableReference>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7061287F2623ADBC000AB231"
-            BuildableName = "GithubUITests.xctest"
-            BlueprintName = "GithubUITests"
-            ReferencedContainer = "container:Github.xcodeproj">
-         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
@@ -57,7 +50,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7061287F2623ADBC000AB231"
