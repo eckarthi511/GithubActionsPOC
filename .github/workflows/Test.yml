@@ -24,6 +24,15 @@ jobs:
       run: |
         brew install sonar-scanner
         gem install slather
+    - name: Build and test
+      run: |
+        xcodebuild -version
+        xcodebuild clean build test -project "${project}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
+      env:
+        project: 'Github.xcodeproj'
+        params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
+        scheme: 'Github'
+        destination: 'name=iPhone 11'
         
         
         
