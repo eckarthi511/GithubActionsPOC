@@ -11,7 +11,7 @@ on:
         - branch-*
 
 jobs:
-  test:
+  build:
     name: Build and test iOS app
     runs-on: macos-latest
 
