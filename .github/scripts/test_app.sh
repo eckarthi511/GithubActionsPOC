@@ -1,8 +1,7 @@
 #!/bin/bash
 
 set -eo pipefail
+            
+xcodebuild -project Github.xcodeproj/ -scheme swift-coverage-example -derivedDataPath Build/ -enableCodeCoverage YES clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
-xcodebuild -project Github.xcodeproj \
-            -scheme Github \
-            -destination platform=iOS\ Simulator,OS=15.2,name=iPhone\ 13 \
-            clean test
+clean test

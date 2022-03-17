@@ -21,7 +21,9 @@ jobs:
     - name: Force Xcode 13.2.1
       run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
     - name: Testing iOS app
-      run: exec ./.github/scripts/test_app.sh
+      run: exec ./.github/scripts/test_app.sh:
+    - name: Create Coverage Report
+      run: exec ./.github/scripts/test_app_CoverageReport.sh:
       
   sonarcloud:
     name: Sonar cloud scan
@@ -33,11 +35,24 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+        
+    - name: Testing iOS app
+      run: exec ./.github/scripts/test_app.sh:
+    - name: Create Coverage Report
+      run: exec ./.github/scripts/test_app_CoverageReport.sh:
+    
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+    - name: SonarCloud Coverage
+        run: sonar-scanner
+            -Dsonar.projectKey=TestCoverage
+            -Dsonar.sources=.
+            -Dsonar.coverageReportPaths=sonarqube-generic-coverage.xml
+            -Dsonar.cfamily.build-wrapper-output.bypass=true
         
         
         
