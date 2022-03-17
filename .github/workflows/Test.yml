@@ -36,11 +36,6 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
-        
-    - name: Testing iOS app
-      run: exec ./.github/scripts/test_app.sh
-    - name: Create Coverage Report
-      run: exec ./.github/scripts/test_app_CoverageReport.sh
     
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
