@@ -13,6 +13,8 @@ on:
 jobs:
   test:
     name: Build and test iOS app
+    env:
+      sonarToken: ${{ secrets.SONAR_TOKEN }}
     runs-on: macos-latest
 
     steps:
@@ -33,6 +35,25 @@ jobs:
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
         scheme: 'Github'
         destination: 'name=iPhone 11'
+        
+    - name: Slather
+      run: |
+        slather coverage --sonarqube-xml ${params} ${project}
+      env:
+        project: 'Github.xcodeproj'
+        params: '
+        --build-directory ./DerivedData
+        --output-directory ./reports
+        --scheme Github
+        --binary-basename Github'
+        
+     - name: Run Sonar
+      if: ${{ env.sonarToken != 0 }}
+      run: |
+        git fetch --unshallow --no-tags
+        sonar-scanner -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
         
         
